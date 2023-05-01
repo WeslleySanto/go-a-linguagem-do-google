@@ -4,14 +4,18 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
 
 const monitoramentos = 3
 const delay = 5
+const ARQUIVO_LOG = "log.txt"
+const ARQUIVO_SITES = "sites.txt"
 
 func main() {
 	exibeIntroducao()
@@ -26,6 +30,7 @@ func main() {
 			iniciarMonitoramento()
 		case 2:
 			fmt.Println("Exibindo Logs...")
+			imprimeLogs()
 		case 0:
 			fmt.Println("Saindo do programa")
 			os.Exit(0)
@@ -81,14 +86,16 @@ func testaSite(site string) {
 
 	if resp.StatusCode == 200 {
 		fmt.Println("Site:", site, "foi carregado com sucesso!")
+		registraLog(resp.StatusCode, site)
 	} else {
 		fmt.Println("Site:", site, "esta com problemas. Status Code:", resp.StatusCode)
+		registraLog(resp.StatusCode, site)
 	}
 
 }
 
 func getSites() []string {
-	arquivo, err := os.Open("sites.txt")
+	arquivo, err := os.Open(ARQUIVO_SITES)
 
 	if err != nil {
 		fmt.Println("Ocorreu um erro ao abrir o arquivo: ", err)
@@ -118,4 +125,30 @@ func leArquivo(arquivo *os.File) []string {
 	}
 
 	return sites
+}
+
+func registraLog(statusCode int, site string) {
+	arquivo, err := os.OpenFile(ARQUIVO_LOG, os.O_CREATE|os.O_RDWR|os.O_APPEND, 0666)
+
+	if err != nil {
+		fmt.Println("Ocorreu um erro ao criar o arquivo: ", err)
+	}
+
+	date := time.Now().Format("02/01/2006 15:04:05")
+	sc := strconv.Itoa(statusCode)
+
+	arquivo.WriteString(date + " - " + sc + " - " + site + "\n")
+
+	arquivo.Close()
+}
+
+func imprimeLogs() {
+
+	arquivo, err := ioutil.ReadFile(ARQUIVO_LOG)
+
+	if err != nil {
+		fmt.Println("Ocorreu um erro ao ler o arquivo: ", err)
+	}
+
+	fmt.Println(string(arquivo))
 }

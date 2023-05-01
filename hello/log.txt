@@ -1,0 +1,15 @@
+01/05/2023 14:41:35 - 200 - http://weslleyesanto.com.br
+01/05/2023 14:41:35 - 200 - https://www.alura.com.br
+01/05/2023 14:41:36 - 404 - https://random-status-code.herokuapp.com
+01/05/2023 14:41:37 - 200 - https://www.caelum.com.br
+01/05/2023 14:41:37 - 200 - https://www.casadocodigo.com.br
+01/05/2023 14:41:42 - 200 - http://weslleyesanto.com.br
+01/05/2023 14:41:43 - 200 - https://www.alura.com.br
+01/05/2023 14:41:44 - 404 - https://random-status-code.herokuapp.com
+01/05/2023 14:41:44 - 200 - https://www.caelum.com.br
+01/05/2023 14:41:45 - 200 - https://www.casadocodigo.com.br
+01/05/2023 14:41:50 - 200 - http://weslleyesanto.com.br
+01/05/2023 14:41:50 - 200 - https://www.alura.com.br
+01/05/2023 14:41:51 - 404 - https://random-status-code.herokuapp.com
+01/05/2023 14:41:52 - 200 - https://www.caelum.com.br
+01/05/2023 14:41:52 - 200 - https://www.casadocodigo.com.br
